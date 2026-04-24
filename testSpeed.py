@@ -17,11 +17,11 @@ def main():
 	hostname = os.getenv("hostname")
 	
 	timestamp = datetime.now()
-	#result = subprocess.run([speedTestPath, "-o", "csv"], capture_output = True, text = True) 
-	testRes = '"136.35.206.146","39.0997","-94.5786","Google Fiber Inc.","Columbus, KS","Optic Communications","215.918","speedtest.optic-communications.com:8080","21","0","889921288.954125","886632212.873472"'
+	result = subprocess.run([speedTestPath, "-o", "csv"], capture_output = True, text = True) 
+	#testRes = '"136.35.206.146","39.0997","-94.5786","Google Fiber Inc.","Columbus, KS","Optic Communications","215.918","speedtest.optic-communications.com:8080","21","0","889921288.954125","886632212.873472"'
 	
-	#resArr = result.stdout.split('","')
-	resArr = testRes.split('","')
+	resArr = result.stdout.split('","')
+	#resArr = testRes.split('","')
 	resArr = [c.replace('"', '') for c in resArr]
 
 	print(f'''
@@ -37,7 +37,7 @@ Upload Speed:                  {float(resArr[11]):.2f}''')
 
 
 	with open(logPath, "a") as f:
-		f.write(f"{hostname:^15} | {timestamp} | {resArr[4]:^10} | {resArr[6]:^8} | {float(resArr[8]):^6.2f} | {float(resArr[10]):^15.2f} | {float(resArr[11]):^15.2f}\n")
+		f.write(f"| {hostname:^15} | {timestamp} | {resArr[4]:^20} | {resArr[6]:^8} | {float(resArr[8]):^7.2f} | {(float(resArr[10])/1000/1000):^15.2f} | {(float(resArr[11])/1000/1000):^15.2f} |\n")
 
 
 
