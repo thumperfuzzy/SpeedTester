@@ -1,0 +1,3 @@
+[submodule "SpeedTest"]
+	path = SpeedTest
+	url = https://github.com/thumperfuzzy/SpeedTest.git
